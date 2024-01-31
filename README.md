@@ -1,0 +1,1 @@
+# SimdJsonSharp.BindingsforC-
