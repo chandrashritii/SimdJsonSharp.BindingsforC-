@@ -1,0 +1,6 @@
+inventory:
+- source: DirectOwners
+  isProduction: false 
+  items:
+  - id: rasunkar@microsoft.com
+  - id: shrchandra@microsoft.com
