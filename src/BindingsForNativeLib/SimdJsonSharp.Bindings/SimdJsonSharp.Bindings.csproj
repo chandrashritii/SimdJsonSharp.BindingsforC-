@@ -16,6 +16,8 @@
     <PackageIconUrl>https://raw.githubusercontent.com/EgorBo/SimdJsonSharp/master/images/logo.png</PackageIconUrl>
     <Version>1.8</Version>
     <OutputPath>..\..\..\Bin\</OutputPath>
+    <SignAssembly>False</SignAssembly>
+    <AssemblyOriginatorKeyFile>C:\SimdJsonSharp.BindingsforC-\CodeSigningCertificate.txt</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   
   <ItemGroup Condition="Exists('..\..\..\Bin\x64\SimdJsonNative.dll')">
