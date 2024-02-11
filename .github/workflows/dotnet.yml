@@ -15,13 +15,10 @@ jobs:
     runs-on: windows-latest
     
     steps:
-      - uses: GabrielAcostaEngler/signtool-code-sign@main
+      - name: Sign binary
+        uses: lando/code-sign-action@v2
         with:
-          certificate: '${{ secrets.SIGNATURE_CERTIFICATE }}'
-          cert-password: '${{ secrets.CERTIFICATE_PASSWORD}}'
-          cert-sha1: 'SHA256'
-          cert-description: 'Self sign SimdJsonSharp.Bindings package'
-          folder: 'path/to/folder'
-          recursive: true
-          timestamp-server: 'http://timestamp.digicert.com'
-    
+            file: path/to/binary
+            certificate-data: ${{ secrets.SIGNATURE_CERTIFICATE }}
+            certificate-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+        
