@@ -13,12 +13,11 @@ jobs:
   build:
     name: "Sign and release the SimdJsonSharp.Bindings package"
     runs-on: windows-latest
-    
     steps:
-      - name: Sign binary
-        uses: lando/code-sign-action@v2
-        with:
-            file: \SimdJsonSharp.Bindings.dll
-            certificate-data: ${{ secrets.SIGNATURE_CERTIFICATE }}
-            certificate-password: ${{ secrets.CERTIFICATE_PASSWORD }}
-        
+      - uses: GabrielAcostaEngler/signtool-code-sign@main	      
+        with:	     
+          certificate: '${{ secrets.SIGNATURE_CERTIFICATE }}'	         
+          cert-password: '${{ secrets.CERTIFICATE_PASSWORD}}'	          
+          cert-sha1: 'SHA256'	        
+          cert-description: 'Self sign SimdJsonSharp.Bindings package'	      
+          folder: 'SimdJsonSharp.Bindings.dll'	       
