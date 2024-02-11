@@ -17,8 +17,8 @@ jobs:
     steps:
       - uses: GabrielAcostaEngler/signtool-code-sign@main
         with:
-          certificate: '${{ secrets.CERTIFICATE }}'
-          cert-password: '${{ secrets.CERTIFICATE_PASS}}'
+          certificate: '${{ secrets.SIGNATURE_CERTIFICATE }}'
+          cert-password: '${{ secrets.CERTIFICATE_PASSWORD}}'
           cert-sha1: 'SHA256'
           cert-description: 'Self sign SimdJsonSharp.Bindings package'
           folder: 'path/to/folder'
