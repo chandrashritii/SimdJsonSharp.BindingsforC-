@@ -13,43 +13,15 @@ jobs:
   build:
     name: "Sign and release the SimdJsonSharp.Bindings package"
     runs-on: windows-latest
-
+    
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    - name: Setup MSbuild
-      uses: microsoft/setup-msbuild@v1.0.2
-    - name: Create Code Signing Certificate
-      run: |
-          New-Item -ItemType directory -Path certificate
-          Set-Content -Path certificate\certificate.txt -Value '${{ secrets.CERTIFICATE }}'
-          certutil -decode certificate\certificate.txt certificate\certificate.pfx
-    - name: Code Sign 2021
-      run: |
-          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /f certificate\certificate.pfx /p '${{ secrets.CERTIFICATE_PASS }}' /t http://timestamp.comodoca.com/authenticode SimdJsonSharp.Bindings.dll
-    - name: Code Sign 2020
-      run: |
-          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /f certificate\certificate.pfx /p '${{ secrets.CERTIFICATE_PASS }}' /t http://timestamp.comodoca.com/authenticode SimdJsonSharp.Bindings.dll    
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ProjectName.Setup\bin\Release\ProjectName.Setup.msi
-          asset_name: ProjectName.Setup.msi
-          asset_content_type: application/octet-stream
+      - uses: GabrielAcostaEngler/signtool-code-sign@main
+        with:
+          certificate: '${{ secrets.CERTIFICATE }}'
+          cert-password: '${{ secrets.CERTIFICATE_PASS}}'
+          cert-sha1: 'SHA256'
+          cert-description: 'Self sign SimdJsonSharp.Bindings package'
+          folder: 'path/to/folder'
+          recursive: true
+          timestamp-server: 'http://timestamp.digicert.com'
+    
