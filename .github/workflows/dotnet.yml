@@ -18,7 +18,7 @@ jobs:
       - name: Sign binary
         uses: lando/code-sign-action@v2
         with:
-            file: SimdJsonSharp.Bindings.dll
+            file: /**/*.dll
             certificate-data: ${{ secrets.SIGNATURE_CERTIFICATE }}
             certificate-password: ${{ secrets.CERTIFICATE_PASSWORD }}
         
