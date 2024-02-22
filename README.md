@@ -1,12 +1,8 @@
 # SimdJsonSharp: Parsing gigabytes of JSON per second
-C# version of [lemire/simdjson](https://github.com/lemire/simdjson) (by Daniel Lemire and Geoff Langdale - https://arxiv.org/abs/1902.08318) fully ported from C to C#, 
-I tried to keep the same format and API). The library accelerates JSON parsing and minification using 
-SIMD instructions (AVX2). C# version uses `System.Runtime.Intrinsics` API.
 
-**UPD:** Now it's also available as a set of pinvokes on top of the native lib as a .NETStandard 2.0 library, 
-thus there are two implementations:
-1) [1.5.0](https://www.nuget.org/packages/SimdJsonSharp.Managed) Fully managed netcoreapp3.0 library (100% port from C to C#)
-2) [1.7.0](https://www.nuget.org/packages/SimdJsonSharp.Bindings) netstandard2.0 library with native lib (bindings are generated via [xoofx/CppAst](https://github.com/xoofx/CppAst))
+Signed assembly package for C# version [EgorBo/SimdJsonSharp](https://github.com/EgorBo/SimdJsonSharp) of [lemire/simdjson](https://github.com/lemire/simdjson) (by Daniel Lemire and Geoff Langdale - https://arxiv.org/abs/1902.08318) fully ported from C to C#, 
+
+Version - 1.7.0 
 
 ## Benchmarks
 The following [benchmark](https://github.com/EgorBo/SimdJsonSharp/blob/master/benchmarks/CountTokens.cs) compares `SimdJsonSharp` with .NET Core 3.0 `Utf8JsonReader`, `Json.NET` and `SpanJson` libraries.
